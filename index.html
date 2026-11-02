@@ -8,7 +8,7 @@
     <link rel="icon" id="favicon" type="image/png" href="https://res.cloudinary.com/dzklt0a5u/image/upload/f_auto,q_auto:eco,dpr_auto,w_250/v1793638389/RamirosLOGO_ppn9lc.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rye&family=Fredoka:wght@400;600;700&family=Outfit:wght@300;400;600;800&family=Alkalami&display=swap" rel="stylesheet">
     
     <style>
         :root {
@@ -19,12 +19,15 @@
             --color-green: #2A9D8F;
             --color-green-hover: #21867a;
             --color-yellow: #F4A261;
+            --color-yellow-deep: #E76F51;
             --color-text-dark: #2c2927;
             --color-text-muted: #5e5a57;
             --color-white: #ffffff;
+            --color-brown: #6b4226;
             
             /* Typography */
-            --font-display: 'Fredoka', cursive, sans-serif;
+            --font-display: 'Rye', 'Fredoka', cursive, serif;
+            --font-heading: 'Alkalami', 'Fredoka', cursive, serif;
             --font-body: 'Outfit', sans-serif;
             
             /* UI Elements */
@@ -51,7 +54,10 @@
             background-color: var(--color-cream);
             line-height: 1.7;
             overflow-x: hidden;
-            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23f4a261' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(244, 162, 97, 0.06) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(42, 157, 143, 0.05) 0%, transparent 40%),
+                url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23f4a261' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
         }
 
         .container {
@@ -68,19 +74,51 @@
         h1, h2, h3, h4, .font-display {
             font-family: var(--font-display);
             color: var(--color-text-dark);
-            line-height: 1.2;
+            line-height: 1.15;
+            letter-spacing: 0.5px;
         }
 
-        /* Navbar */
+        /* ====== DECORATIVE ELEMENTS ====== */
+        .papel-picado {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 0;
+            opacity: 0.9;
+        }
+        .papel-picado span {
+            width: 14px;
+            height: 14px;
+            border-radius: 2px;
+            display: inline-block;
+            transform: rotate(45deg);
+        }
+        .papel-picado span:nth-child(odd) { background: var(--color-red); }
+        .papel-picado span:nth-child(even) { background: var(--color-green); }
+        .papel-picado span:nth-child(3n) { background: var(--color-yellow); }
+
+        .zigzag-divider {
+            height: 24px;
+            background-image: 
+                linear-gradient(135deg, var(--color-red) 25%, transparent 25%),
+                linear-gradient(225deg, var(--color-red) 25%, transparent 25%);
+            background-size: 24px 24px;
+            background-position: 0 0;
+            margin: 0;
+        }
+
+        /* ====== NAVBAR ====== */
         .navbar {
             position: fixed;
             top: 0; left: 0; right: 0;
-            background-color: rgba(253, 250, 242, 0.95);
+            background-color: rgba(253, 250, 242, 0.96);
             backdrop-filter: blur(10px);
             z-index: 1000;
-            padding: 12px 0;
-            box-shadow: var(--shadow-sm);
+            padding: 8px 0;
+            box-shadow: 0 4px 20px rgba(107, 66, 38, 0.1);
             transition: var(--transition);
+            border-bottom: 3px solid var(--color-yellow);
         }
 
         .nav-container {
@@ -90,17 +128,17 @@
         }
 
         .navbar-brand img {
-            height: 60px;
+            height: 64px;
             width: auto;
             transition: var(--transition);
         }
 
-        .navbar-brand:hover img { transform: scale(1.05); }
+        .navbar-brand:hover img { transform: scale(1.05) rotate(-2deg); }
 
         .nav-menu {
             display: flex;
             align-items: center;
-            gap: 32px;
+            gap: 30px;
         }
 
         .nav-link {
@@ -109,6 +147,8 @@
             color: var(--color-text-dark);
             transition: var(--transition);
             position: relative;
+            font-family: var(--font-body);
+            letter-spacing: 0.3px;
         }
 
         .nav-link::after {
@@ -127,27 +167,27 @@
         .lang-switch {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 4px;
             background: var(--color-white);
-            padding: 6px 12px;
+            padding: 4px;
             border-radius: var(--radius-pill);
             box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
-            border: 1px solid rgba(0,0,0,0.05);
+            border: 2px solid var(--color-yellow);
         }
 
         .lang-btn {
             cursor: pointer;
-            font-weight: 600;
-            font-size: 14px;
+            font-weight: 700;
+            font-size: 13px;
             color: var(--color-text-muted);
             transition: var(--transition);
-            padding: 4px 8px;
+            padding: 4px 10px;
             border-radius: var(--radius-pill);
         }
 
         .lang-btn.active {
-            background: var(--color-yellow);
-            color: var(--color-text-dark);
+            background: var(--color-red);
+            color: var(--color-white);
         }
 
         .navbar-toggler {
@@ -164,7 +204,7 @@
             transition: var(--transition);
         }
 
-        /* Buttons */
+        /* ====== BUTTONS ====== */
         .btn {
             display: inline-flex;
             align-items: center;
@@ -178,18 +218,31 @@
             cursor: pointer;
             border: none;
             font-family: var(--font-body);
+            letter-spacing: 0.3px;
+            position: relative;
+            overflow: hidden;
         }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s ease;
+        }
+        .btn:hover::before { left: 100%; }
 
         .btn-filled {
             background-color: var(--color-red);
             color: var(--color-white);
-            box-shadow: 0 4px 15px rgba(211, 47, 47, 0.3);
+            box-shadow: 0 6px 18px rgba(211, 47, 47, 0.35);
         }
 
         .btn-filled:hover {
             background-color: var(--color-green);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(42, 157, 143, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 22px rgba(42, 157, 143, 0.45);
             color: var(--color-white);
         }
 
@@ -202,9 +255,10 @@
         .btn-outline:hover {
             background-color: var(--color-text-dark);
             color: var(--color-white);
+            transform: translateY(-3px);
         }
 
-        /* Hero Section */
+        /* ====== HERO ====== */
         .hero {
             position: relative;
             min-height: 100vh;
@@ -221,8 +275,7 @@
         .hero-overlay {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            /* Restored semi-transparency so the background image is visible while text remains readable */
-            background: linear-gradient(135deg, rgba(253, 250, 242, 0.85) 0%, rgba(253, 250, 242, 0.10) 100%);
+            background: linear-gradient(135deg, rgba(253, 250, 242, 0.88) 0%, rgba(253, 250, 242, 0.15) 100%);
             z-index: 1;
         }
 
@@ -240,7 +293,7 @@
 
         .hero-content {
             padding: 0;
-            max-width: 800px;
+            max-width: 820px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -252,22 +305,33 @@
             gap: 8px;
             background: var(--color-yellow);
             color: var(--color-text-dark);
-            padding: 8px 16px;
+            padding: 8px 20px;
             border-radius: var(--radius-pill);
             font-weight: 700;
             font-size: 14px;
             margin-bottom: 24px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            border: 2px dashed var(--color-brown);
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .hero-title {
-            font-size: clamp(3.5rem, 6vw, 5.5rem);
+            font-size: clamp(3.2rem, 6vw, 5.5rem);
             margin-bottom: 20px;
             color: var(--color-text-dark);
-            text-shadow: 0 2px 15px rgba(255,255,255,0.8);
+            text-shadow: 0 3px 20px rgba(255,255,255,0.9);
         }
         
-        .hero-title span { color: var(--color-red); }
+        .hero-title .brand-name { color: var(--color-red); display: inline-block; }
+        .hero-title .brand-name::after {
+            content: '';
+            display: block;
+            height: 6px;
+            margin-top: 4px;
+            background: repeating-linear-gradient(90deg, var(--color-green) 0 12px, var(--color-yellow) 12px 24px, var(--color-red) 24px 36px);
+            border-radius: 3px;
+        }
 
         .hero-subtitle {
             font-size: 1.25rem;
@@ -275,7 +339,7 @@
             margin-bottom: 32px;
             max-width: 100%;
             text-shadow: 0 1px 10px rgba(255,255,255,0.9);
-            font-weight: 600;
+            font-weight: 500;
         }
 
         .hero-actions {
@@ -285,7 +349,7 @@
             justify-content: center;
         }
 
-        /* Section Headers */
+        /* ====== SECTION HEADERS ====== */
         .section-header {
             text-align: center;
             margin-bottom: 60px;
@@ -293,19 +357,21 @@
         }
 
         .section-tag {
-            font-family: var(--font-display);
-            color: var(--color-yellow);
-            font-size: 1.25rem;
-            letter-spacing: 2px;
+            font-family: var(--font-body);
+            color: var(--color-green);
+            font-size: 1rem;
+            letter-spacing: 3px;
             text-transform: uppercase;
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
+            font-weight: 700;
         }
 
         .section-title {
-            font-size: clamp(2rem, 4vw, 3rem);
+            font-size: clamp(2rem, 4vw, 3.2rem);
             position: relative;
             display: inline-block;
+            color: var(--color-brown);
         }
 
         .section-title::after {
@@ -314,20 +380,32 @@
             bottom: -15px;
             left: 50%;
             transform: translateX(-50%);
-            width: 60px;
+            width: 80px;
             height: 4px;
-            background-color: var(--color-red);
+            background: linear-gradient(90deg, var(--color-red), var(--color-yellow), var(--color-green));
             border-radius: 2px;
         }
 
-        /* About Section */
-        .about-section { padding: var(--section-pad); }
+        /* ====== ABOUT ====== */
+        .about-section { padding: var(--section-pad); position: relative; }
+
+        .about-section::before {
+            content: '';
+            position: absolute;
+            top: 40px; right: 0;
+            width: 200px; height: 200px;
+            background: radial-gradient(circle, rgba(244, 162, 97, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: 0;
+        }
 
         .about-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 60px;
             align-items: center;
+            position: relative;
+            z-index: 1;
         }
 
         .about-visual {
@@ -337,33 +415,57 @@
             gap: 20px;
         }
 
+        .about-visual::before {
+            content: '';
+            position: absolute;
+            inset: -15px;
+            border: 3px dashed var(--color-yellow);
+            border-radius: var(--radius-lg);
+            z-index: -1;
+            opacity: 0.5;
+        }
+
         .about-img {
             border-radius: var(--radius-md);
-            box-shadow: var(--shadow-sm);
+            box-shadow: var(--shadow-md);
             width: 100%;
             height: 300px;
             object-fit: cover;
+            border: 4px solid var(--color-white);
+            transition: var(--transition);
         }
+
+        .about-img:hover { transform: rotate(-2deg) scale(1.02); }
         
         .about-img:nth-child(2) { margin-top: 40px; }
+        .about-img:nth-child(2):hover { transform: rotate(2deg) scale(1.02); }
 
         .about-content h2 { margin-bottom: 24px; }
         .about-content p {
             margin-bottom: 16px;
             color: var(--color-text-muted);
-            font-size: 1.1rem;
+            font-size: 1.08rem;
         }
 
-        /* Gallery Section */
+        /* ====== GALLERY ====== */
         .gallery-section { 
             padding: var(--section-pad);
             background-color: var(--color-white);
+            position: relative;
+        }
+
+        .gallery-section::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 8px;
+            background: repeating-linear-gradient(90deg, var(--color-red) 0 40px, var(--color-green) 40px 80px, var(--color-yellow) 80px 120px);
         }
 
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 16px;
+            gap: 18px;
         }
 
         .gallery-item {
@@ -372,7 +474,25 @@
             overflow: hidden;
             aspect-ratio: 1;
             box-shadow: var(--shadow-sm);
+            border: 4px solid var(--color-white);
+            transition: var(--transition);
         }
+
+        .gallery-item::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 60%, rgba(211, 47, 47, 0.3));
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--color-yellow);
+        }
+        .gallery-item:hover::after { opacity: 1; }
 
         .gallery-img {
             width: 100%; height: 100%;
@@ -380,9 +500,9 @@
             transition: transform 0.5s ease;
         }
 
-        .gallery-item:hover .gallery-img { transform: scale(1.1); }
+        .gallery-item:hover .gallery-img { transform: scale(1.12); }
 
-        /* Reviews Section (Carousel) */
+        /* ====== REVIEWS ====== */
         .reviews-section {
             padding: var(--section-pad);
             background-color: var(--color-cream);
@@ -397,7 +517,6 @@
             position: relative;
         }
         
-        /* Fade edges for carousel */
         .reviews-slider-container::before,
         .reviews-slider-container::after {
             content: "";
@@ -440,12 +559,19 @@
             max-width: 350px;
             background: var(--color-white);
             padding: 24px;
-            border-radius: 8px; /* More like Google */
-            box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); /* Google-like shadow */
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(107, 66, 38, 0.1);
             display: flex;
             flex-direction: column;
             gap: 16px;
-            border: 1px solid #e0e0e0;
+            border: 1px solid #f0e6d8;
+            border-top: 4px solid var(--color-yellow);
+            transition: var(--transition);
+        }
+
+        .review-card:hover {
+            box-shadow: 0 8px 24px rgba(107, 66, 38, 0.15);
+            transform: translateY(-4px);
         }
 
         .review-header {
@@ -456,13 +582,16 @@
         }
 
         .author-avatar {
-            width: 40px; height: 40px;
+            width: 42px; height: 42px;
             border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
             font-family: Arial, sans-serif;
             color: var(--color-white);
             font-size: 1.2rem;
-            font-weight: 500;
+            font-weight: 600;
+            flex-shrink: 0;
+            border: 2px solid var(--color-white);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
         }
 
         .author-info {
@@ -475,8 +604,8 @@
             font-size: 14px;
             margin: 0;
             color: #3c4043;
-            font-weight: 500;
-            font-family: Roboto, Arial, sans-serif;
+            font-weight: 600;
+            font-family: var(--font-body);
         }
 
         .author-meta {
@@ -508,14 +637,14 @@
             align-items: center;
         }
 
-        .review-stars svg { width: 14px; height: 14px; fill: currentColor; }
+        .review-stars svg { width: 15px; height: 15px; fill: currentColor; }
 
         .review-text {
             font-size: 14px;
             color: #202124;
-            line-height: 1.5;
+            line-height: 1.55;
             flex-grow: 1;
-            font-family: Roboto, Arial, sans-serif;
+            font-family: var(--font-body);
             display: -webkit-box;
             -webkit-line-clamp: 5;
             -webkit-box-orient: vertical;
@@ -529,9 +658,7 @@
             font-size: 12px;
             color: #70757a;
             align-items: center;
-            padding-top: 0;
-            border-top: none;
-            font-family: Roboto, Arial, sans-serif;
+            font-family: var(--font-body);
         }
 
         .interaction {
@@ -554,10 +681,19 @@
             fill: #70757a;
         }
 
-        /* Info Section */
+        /* ====== INFO ====== */
         .info-section {
             padding: var(--section-pad);
             background-color: var(--color-white);
+            position: relative;
+        }
+
+        .info-section::before {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 6px;
+            background: repeating-linear-gradient(90deg, var(--color-yellow) 0 40px, var(--color-red) 40px 80px, var(--color-green) 80px 120px);
         }
 
         .info-grid {
@@ -573,23 +709,41 @@
             border-radius: var(--radius-md);
             text-align: center;
             transition: var(--transition);
-            border: 1px solid rgba(0,0,0,0.03);
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .info-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 5px;
+            background: linear-gradient(90deg, var(--color-red), var(--color-yellow), var(--color-green));
         }
 
         .info-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
             box-shadow: var(--shadow-md);
             border-color: var(--color-yellow);
         }
 
         .info-icon {
-            width: 60px; height: 60px;
+            width: 66px; height: 66px;
             background: var(--color-white);
             border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
             margin: 0 auto 20px;
             color: var(--color-red);
             box-shadow: var(--shadow-sm);
+            border: 3px solid var(--color-yellow);
+            transition: var(--transition);
+        }
+
+        .info-card:hover .info-icon {
+            transform: rotate(-8deg) scale(1.08);
+            background: var(--color-red);
+            color: var(--color-white);
         }
         
         .info-icon svg { width: 28px; height: 28px; fill: currentColor; }
@@ -597,18 +751,30 @@
         .info-card h3 {
             margin-bottom: 12px;
             font-size: 1.5rem;
+            font-family: var(--font-heading);
+            color: var(--color-brown);
         }
 
         .info-card p {
             color: var(--color-text-muted);
-            font-size: 1.1rem;
+            font-size: 1.05rem;
         }
 
-        /* Footer */
+        /* ====== FOOTER ====== */
         .footer {
             background-color: #1a1817;
             color: #d4d4d4;
             padding: 80px 0 30px;
+            position: relative;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: -20px; left: 0; right: 0;
+            height: 40px;
+            background: var(--color-white);
+            clip-path: polygon(0 0, 100% 0, 100% 40%, 75% 100%, 50% 40%, 25% 100%, 0 40%);
         }
 
         .footer-grid {
@@ -624,6 +790,7 @@
             border-radius: var(--radius-sm);
             display: inline-block;
             margin-bottom: 20px;
+            border: 3px solid var(--color-yellow);
         }
 
         .footer-logo {
@@ -642,26 +809,27 @@
         }
 
         .social-link {
-            width: 40px; height: 40px;
+            width: 42px; height: 42px;
             border-radius: 50%;
             background: rgba(255,255,255,0.1);
             display: flex; align-items: center; justify-content: center;
             transition: var(--transition);
             color: var(--color-white);
+            border: 1px solid rgba(255,255,255,0.15);
         }
 
         .social-link:hover {
             background: var(--color-red);
-            transform: translateY(-3px);
+            transform: translateY(-3px) rotate(6deg);
         }
         
         .social-link svg { width: 20px; height: 20px; fill: currentColor; }
 
         .footer-title {
-            color: var(--color-white);
+            color: var(--color-yellow);
             margin-bottom: 24px;
             font-size: 1.5rem;
-            font-family: var(--font-display);
+            font-family: var(--font-heading);
         }
 
         .footer-contact li {
@@ -715,7 +883,8 @@
                 transition: clip-path 0.4s ease-in-out;
             }
             .nav-menu.active { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
-            .hero-title { font-size: 2.5rem; }
+            .hero-title { font-size: 2.6rem; }
+            .hero { background-attachment: scroll; }
         }
     </style>
 </head>
@@ -758,8 +927,8 @@
                     <span data-es="Sabor 100% Auténtico" data-en="100% Authentic Flavor">100% Authentic Flavor</span>
                 </div>
                 <h1 class="hero-title">
-                    <span data-es="Ramiro's" data-en="Ramiro's">Ramiro's</span><br>
-                    <span style="color: var(--color-text-dark);" data-es="Comida Mexicana" data-en="Mexican Food">Mexican Food</span>
+                    <span class="brand-name" data-es="Ramiro's" data-en="Ramiro's">Ramiro's</span><br>
+                    <span style="color: var(--color-brown);" data-es="Comida Mexicana" data-en="Mexican Food">Mexican Food</span>
                 </h1>
                 <p class="hero-subtitle" data-es="Disfruta de la mejor comida mexicana, burritos con tortillas de harina únicas y recetas tradicionales servidas con un trato cálido y familiar." data-en="Enjoy the best Mexican food, burritos with unique flour tortillas, and traditional recipes served with warm and family-friendly hospitality.">
                     Enjoy the best Mexican food, burritos with unique flour tortillas, and traditional recipes served with warm and family-friendly hospitality.
@@ -774,6 +943,8 @@
             </div>
         </div>
     </section>
+
+    <div class="zigzag-divider"></div>
 
     <!-- About Section -->
     <section class="about-section" id="about">
@@ -841,9 +1012,9 @@
                         <div class="author-avatar" style="background-color: #E91E63;">A</div>
                         <div class="author-info">
                             <h4>Alejandra Aguirre</h4>
-                            <span class="author-meta">1 opinión</span>
+                            <span class="author-meta" data-es="1 opinión" data-en="1 review">1 review</span>
                         </div>
-                        <svg class="google-icon" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+                        <svg class="google-icon" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
                     </div>
                     <div class="review-stars">
                         <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
@@ -852,8 +1023,8 @@
                         <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
                         <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
                     </div>
-                    <p class="review-text" data-es="Es un lugar que brinda alimentos exquisitos, me encanta, es comida mexicana con sabor único, burritos con tortillas de harina unicas en sabor !!! Felicidades por la amabilidad, atención, sabor y buen precio, bendiciones a los nuevos dueños y por supuesto a todos sus comensales!! Buen provecho!" data-en="It is a place that offers exquisite food, I love it, it is Mexican food with a unique flavor, burritos with flour tortillas unique in flavor !!! Congratulations on the kindness, attention, flavor and good price, blessings to the new owners and of course to all their diners!! Enjoy!">
-                        Es un lugar que brinda alimentos exquisitos, me encanta, es comida mexicana con sabor único, burritos con tortillas de harina unicas en sabor !!! Felicidades por la amabilidad, atención, sabor y buen precio, bendiciones a los nuevos dueños y por supuesto a todos sus comensales!! Buen provecho!
+                    <p class="review-text" data-es="Es un lugar que brinda alimentos exquisitos, me encanta, es comida mexicana con sabor único, burritos con tortillas de harina únicas en sabor. ¡Felicidades por la amabilidad, atención, sabor y buen precio! ¡Bendiciones a los nuevos dueños y por supuesto a todos sus comensales! ¡Buen provecho!" data-en="It is a place that offers exquisite food, I love it, it is Mexican food with a unique flavor, burritos with flour tortillas unique in flavor. Congratulations on the kindness, attention, flavor and good price! Blessings to the new owners and of course to all their diners! Enjoy!">
+                        Es un lugar que brinda alimentos exquisitos, me encanta, es comida mexicana con sabor único, burritos con tortillas de harina únicas en sabor. ¡Felicidades por la amabilidad, atención, sabor y buen precio! ¡Bendiciones a los nuevos dueños y por supuesto a todos sus comensales! ¡Buen provecho!
                     </p>
                     <div class="review-interactions">
                         <span class="interaction">
@@ -869,7 +1040,7 @@
                         <div class="author-avatar" style="background-color: #009688;">A</div>
                         <div class="author-info">
                             <h4>Aldo Esparza Portugal</h4>
-                            <span class="author-meta">5 opiniones · 2 fotos</span>
+                            <span class="author-meta" data-es="5 opiniones · 2 fotos" data-en="5 reviews · 2 photos">5 reviews · 2 photos</span>
                         </div>
                         <svg class="google-icon" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
                     </div>
@@ -880,8 +1051,8 @@
                         <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
                         <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
                     </div>
-                    <p class="review-text" data-es="Excelente servicio, el personal muy amable y su comida está muy buena" data-en="Excellent service, very friendly staff and their food is very good">
-                        Excelente servicio, el personal muy amable y su comida está muy buena
+                    <p class="review-text" data-es="Excelente servicio, el personal muy amable y su comida está muy buena." data-en="Excellent service, very friendly staff and their food is very good.">
+                        Excelente servicio, el personal muy amable y su comida está muy buena.
                     </p>
                 </div>
 
@@ -891,7 +1062,7 @@
                         <div class="author-avatar" style="background-color: #673AB7;">S</div>
                         <div class="author-info">
                             <h4>Sergio Preciado</h4>
-                            <span class="author-meta"><span class="local-guide-icon">★</span> Local Guide · 15 opiniones</span>
+                            <span class="author-meta"><span class="local-guide-icon">★</span> <span data-es="Guía Local · 15 opiniones" data-en="Local Guide · 15 reviews">Local Guide · 15 reviews</span></span>
                         </div>
                         <svg class="google-icon" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
                     </div>
@@ -902,8 +1073,8 @@
                         <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
                         <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
                     </div>
-                    <p class="review-text" data-es="Muy rica comida y el servicio de la cajera de la tarde es excelente, fue muy amable y servicial ,grata experiencia." data-en="Very tasty food and the service from the afternoon cashier is excellent, she was very friendly and helpful, pleasant experience.">
-                        Muy rica comida y el servicio de la cajera de la tarde es excelente, fue muy amable y servicial ,grata experiencia.
+                    <p class="review-text" data-es="Muy rica comida y el servicio de la cajera de la tarde es excelente, fue muy amable y servicial, grata experiencia." data-en="Very tasty food and the service from the afternoon cashier is excellent, she was very friendly and helpful, pleasant experience.">
+                        Muy rica comida y el servicio de la cajera de la tarde es excelente, fue muy amable y servicial, grata experiencia.
                     </p>
                     <div class="review-interactions">
                         <span class="interaction">
@@ -919,7 +1090,7 @@
                         <div class="author-avatar" style="background-color: #F44336;">R</div>
                         <div class="author-info">
                             <h4>Rosalba Garcia</h4>
-                            <span class="author-meta">7 opiniones · 1 foto</span>
+                            <span class="author-meta" data-es="7 opiniones · 1 foto" data-en="7 reviews · 1 photo">7 reviews · 1 photo</span>
                         </div>
                         <svg class="google-icon" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
                     </div>
@@ -930,8 +1101,8 @@
                         <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
                         <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
                     </div>
-                    <p class="review-text" data-es="Muy rica comida y súper generosos osea no están pobres las órdenes en carnes 👍😋" data-en="Very tasty food and super generous, meaning the meat portions are not poor 👍😋">
-                        Muy rica comida y súper generosos osea no están pobres las órdenes en carnes 👍😋
+                    <p class="review-text" data-es="Muy rica comida y súper generosos, o sea, no están pobres las órdenes en carnes 👍😋" data-en="Very tasty food and super generous, meaning the meat portions are not poor 👍😋">
+                        Muy rica comida y súper generosos, o sea, no están pobres las órdenes en carnes 👍😋
                     </p>
                 </div>
 
@@ -941,7 +1112,7 @@
                         <div class="author-avatar" style="background-color: #3F51B5;">E</div>
                         <div class="author-info">
                             <h4>Estuardo Pascual</h4>
-                            <span class="author-meta">3 opiniones</span>
+                            <span class="author-meta" data-es="3 opiniones" data-en="3 reviews">3 reviews</span>
                         </div>
                         <svg class="google-icon" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
                     </div>
@@ -951,9 +1122,10 @@
                         <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
                         <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
                         <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                        <svg viewBox="0 0 24 24"><path fill="#e0e0e0" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
                     </div>
-                    <p class="review-text" data-es="Aqui siempre me han atendido muy bien excelente servicio la muchacha del drive true siempre muy amable y atenta..." data-en="They have always treated me very well here, excellent service, the drive-thru girl is always very friendly and attentive...">
-                        Aqui siempre me han atendido muy bien excelente servicio la muchacha del drive true siempre muy amable y atenta...
+                    <p class="review-text" data-es="Buenos tacos, nomás la carne asada estaba muy dura, pero lo demás muy bueno." data-en="Good tacos, just the carne asada was very tough, but everything else was very good.">
+                        Buenos tacos, nomás la carne asada estaba muy dura, pero lo demás muy bueno.
                     </p>
                 </div>
 
@@ -963,7 +1135,7 @@
                         <div class="author-avatar" style="background-color: #FF9800;">S</div>
                         <div class="author-info">
                             <h4>Samuel Cruz</h4>
-                            <span class="author-meta"><span class="local-guide-icon">★</span> Local Guide · 826 opiniones</span>
+                            <span class="author-meta"><span class="local-guide-icon">★</span> <span data-es="Guía Local · 826 opiniones" data-en="Local Guide · 826 reviews">Local Guide · 826 reviews</span></span>
                         </div>
                         <svg class="google-icon" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
                     </div>
@@ -974,8 +1146,8 @@
                         <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
                         <svg viewBox="0 0 24 24"><path fill="#e0e0e0" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
                     </div>
-                    <p class="review-text" data-es="Buenos tacos no más la carne asada estaba muy dura pero lo demás muy bueno" data-en="Good tacos, just the carne asada was very tough but everything else was very good">
-                        Buenos tacos no más la carne asada estaba muy dura pero lo demás muy bueno
+                    <p class="review-text" data-es="Los tacos están buenos, la carne asada estaba regular, pero todo lo demás muy bien." data-en="The tacos are good, the carne asada was regular, but everything else is very good.">
+                        Los tacos están buenos, la carne asada estaba regular, pero todo lo demás muy bien.
                     </p>
                 </div>
 
@@ -985,7 +1157,7 @@
                         <div class="author-avatar" style="background-color: #9C27B0;">S</div>
                         <div class="author-info">
                             <h4>SYLVIA CORTEZ</h4>
-                            <span class="author-meta">45 opiniones</span>
+                            <span class="author-meta" data-es="45 opiniones" data-en="45 reviews">45 reviews</span>
                         </div>
                         <svg class="google-icon" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
                     </div>
@@ -996,8 +1168,8 @@
                         <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
                         <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
                     </div>
-                    <p class="review-text" data-es="Por Ser La Primera ves de Pasar Comer Me Gustaron Los Burritos La Especial que Tienen Ramiro's Mexican Food" data-en="Being my first time stopping to eat, I liked the burritos, the special they have at Ramiro's Mexican Food">
-                        Por Ser La Primera ves de Pasar Comer Me Gustaron Los Burritos La Especial que Tienen Ramiro's Mexican Food
+                    <p class="review-text" data-es="Por ser la primera vez de pasar a comer, me gustaron los burritos, la especial que tienen en Ramiro's Mexican Food." data-en="Being my first time stopping to eat, I liked the burritos, the special they have at Ramiro's Mexican Food.">
+                        Por ser la primera vez de pasar a comer, me gustaron los burritos, la especial que tienen en Ramiro's Mexican Food.
                     </p>
                     <div class="review-interactions">
                         <span class="interaction">
@@ -1013,7 +1185,7 @@
                         <div class="author-avatar" style="background-color: #03A9F4;">A</div>
                         <div class="author-info">
                             <h4>Alejandra Cardenas</h4>
-                            <span class="author-meta"><span class="local-guide-icon">★</span> Local Guide · 573 opiniones</span>
+                            <span class="author-meta"><span class="local-guide-icon">★</span> <span data-es="Guía Local · 573 opiniones" data-en="Local Guide · 573 reviews">Local Guide · 573 reviews</span></span>
                         </div>
                         <svg class="google-icon" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
                     </div>
@@ -1024,8 +1196,8 @@
                         <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
                         <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
                     </div>
-                    <p class="review-text" data-es="Los burritos de pollo con queso ..y de asada con pico de gallo lo mejor. ...tienen que probarlos. .😋" data-en="The chicken burritos with cheese ..and asada with pico de gallo the best. ...you have to try them. .😋">
-                        Los burritos de pollo con queso ..y de asada con pico de gallo lo mejor. ...tienen que probarlos. .😋
+                    <p class="review-text" data-es="Los burritos de pollo con queso y de asada con pico de gallo, lo mejor. Tienen que probarlos. 😋" data-en="The chicken burritos with cheese and asada with pico de gallo, the best. You have to try them. 😋">
+                        Los burritos de pollo con queso y de asada con pico de gallo, lo mejor. Tienen que probarlos. 😋
                     </p>
                     <div class="review-interactions">
                         <span class="interaction">
@@ -1052,7 +1224,7 @@
                         <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
                     </div>
                     <h3 data-es="Horarios" data-en="Opening Hours">Opening Hours</h3>
-                    <p id="info-hours">Monday - Sunday<br>8AM - 10PM</p>
+                    <p id="info-hours" data-es="Lunes - Domingo<br>8AM - 10PM" data-en="Monday - Sunday<br>8AM - 10PM">Monday - Sunday<br>8AM - 10PM</p>
                 </div>
                 <div class="info-card">
                     <div class="info-icon">
@@ -1070,7 +1242,7 @@
                 </div>
             </div>
             
-            <div style="margin-top: 60px; border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-sm);">
+            <div style="margin-top: 60px; border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-sm); border: 4px solid var(--color-white);">
                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3305.020473215277!2d-117.69176332467332!3d34.06894081686708!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c3346d790d9657%3A0xe536d5a153860bb4!2s10310%20Central%20Ave%2C%20Montclair%2C%20CA%2091763%2C%20EE.%20UU.!5e0!3m2!1ses-419!2smx!4v1700000000000!5m2!1ses-419!2smx" width="100%" height="400" style="border:0; display: block;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
         </div>
@@ -1106,12 +1278,12 @@
                 </div>
                 <div>
                     <h4 class="footer-title" data-es="Horarios" data-en="Opening Hours">Opening Hours</h4>
-                    <p id="footer-hours">Monday - Sunday<br>8AM - 10PM</p>
+                    <p id="footer-hours" data-es="Lunes - Domingo<br>8AM - 10PM" data-en="Monday - Sunday<br>8AM - 10PM">Monday - Sunday<br>8AM - 10PM</p>
                 </div>
             </div>
             
             <div class="footer-bottom">
-                &copy; 2015-<span id="dynamic-year"></span> Powered by <a href="https://menutech.xyz" target="_blank" rel="noopener noreferrer">Menutech</a>. All Rights Reserved.
+                &copy; 2015-<span id="dynamic-year"></span> Powered by <a href="https://menutech.xyz" target="_blank" rel="noopener noreferrer">Menutech</a>. <span data-es="Todos los derechos reservados." data-en="All Rights Reserved.">All Rights Reserved.</span>
             </div>
         </div>
     </footer>
@@ -1160,16 +1332,25 @@
             currentLang = lang;
             
             document.querySelectorAll('[data-es]').forEach(el => {
-                if(el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
-                    el.placeholder = el.getAttribute(`data-${lang}`);
+                const translated = el.getAttribute(`data-${lang}`);
+                if (translated === null) return;
+                if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                    el.placeholder = translated;
+                } else if (el.children.length === 0) {
+                    el.innerHTML = translated;
                 } else {
-                    el.innerHTML = el.getAttribute(`data-${lang}`);
+                    // Preserve nested elements like <br> and SVG
+                    if (el.tagName === 'P' || el.tagName === 'SPAN' || el.tagName === 'H1' || el.tagName === 'H2' || el.tagName === 'H3' || el.tagName === 'H4') {
+                        el.innerHTML = translated;
+                    } else {
+                        el.innerHTML = translated;
+                    }
                 }
             });
 
             const esBtn = document.getElementById('lang-es');
             const enBtn = document.getElementById('lang-en');
-            if(esBtn && enBtn) {
+            if (esBtn && enBtn) {
                 if (lang === 'es') {
                     esBtn.classList.add('active');
                     enBtn.classList.remove('active');
@@ -1205,8 +1386,7 @@
             if (data.aboutImg2) document.getElementById('about-img-2').src = optimizeCloudinaryUrl(data.aboutImg2, { width: 600 });
 
             if (data.info) {
-                const fixText = t => (t || '').replace(/
-/g, '<br>');
+                const fixText = t => (t || '').replace(/\n/g, '<br>');
                 
                 if(document.getElementById('info-hours')) document.getElementById('info-hours').innerHTML = fixText(data.info.hours);
                 if(document.getElementById('info-phone')) document.getElementById('info-phone').textContent = data.info.phone || '';
@@ -1222,16 +1402,14 @@
                 if (container) {
                     container.innerHTML = data.gallery.map(img => `
                         <div class="gallery-item">
-                            <img src="${optimizeCloudinaryUrl(img, { width: 500, height: 500, crop: 'fill' })}" class="gallery-img" loading="lazy">
+                            <img src="${optimizeCloudinaryUrl(img, { width: 500, height: 500, crop: 'fill' })}" class="gallery-img" loading="lazy" alt="Gallery Food">
                         </div>
                     `).join('');
                 }
             }
 
             if (data.paragraphs && data.paragraphs.about) {
-                const segments = data.paragraphs.about.split('
-
-');
+                const segments = data.paragraphs.about.split('\n\n');
                 ['about-p1', 'about-p2', 'about-p3'].forEach((id, index) => {
                     const el = document.getElementById(id);
                     if (el && segments[index]) {
