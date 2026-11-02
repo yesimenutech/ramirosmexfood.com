@@ -1,0 +1,1283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ramiro's Mexican Food</title>
+    <meta name="description" content="Authentic Mexican Food, Tacos, Burritos, and more. Order online for pickup or delivery.">
+    <link rel="icon" id="favicon" type="image/png" href="https://res.cloudinary.com/dzklt0a5u/image/upload/f_auto,q_auto:eco,dpr_auto,w_250/v1793638389/RamirosLOGO_ppn9lc.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* Branding Colors */
+            --color-cream: #FDFaf2;
+            --color-red: #D32F2F;
+            --color-red-hover: #b71c1c;
+            --color-green: #2A9D8F;
+            --color-green-hover: #21867a;
+            --color-yellow: #F4A261;
+            --color-text-dark: #2c2927;
+            --color-text-muted: #5e5a57;
+            --color-white: #ffffff;
+            
+            /* Typography */
+            --font-display: 'Fredoka', cursive, sans-serif;
+            --font-body: 'Outfit', sans-serif;
+            
+            /* UI Elements */
+            --radius-sm: 8px;
+            --radius-md: 16px;
+            --radius-lg: 32px;
+            --radius-pill: 50px;
+            --shadow-sm: 0 4px 6px rgba(44, 41, 39, 0.05);
+            --shadow-md: 0 10px 30px rgba(44, 41, 39, 0.08);
+            --shadow-hover: 0 15px 35px rgba(211, 47, 47, 0.15);
+            
+            /* Layout */
+            --section-pad: 100px 0;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        html { scroll-behavior: smooth; font-size: 16px; }
+        
+        body {
+            font-family: var(--font-body);
+            color: var(--color-text-dark);
+            background-color: var(--color-cream);
+            line-height: 1.7;
+            overflow-x: hidden;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23f4a261' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        img { max-width: 100%; height: auto; display: block; }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        /* Typography System */
+        h1, h2, h3, h4, .font-display {
+            font-family: var(--font-display);
+            color: var(--color-text-dark);
+            line-height: 1.2;
+        }
+
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            background-color: rgba(253, 250, 242, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 12px 0;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar-brand img {
+            height: 60px;
+            width: auto;
+            transition: var(--transition);
+        }
+
+        .navbar-brand:hover img { transform: scale(1.05); }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+
+        .nav-link {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--color-text-dark);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px; left: 0;
+            width: 0; height: 3px;
+            background-color: var(--color-red);
+            transition: var(--transition);
+            border-radius: 2px;
+        }
+
+        .nav-link:hover { color: var(--color-red); }
+        .nav-link:hover::after { width: 100%; }
+
+        .lang-switch {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--color-white);
+            padding: 6px 12px;
+            border-radius: var(--radius-pill);
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .lang-btn {
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--color-text-muted);
+            transition: var(--transition);
+            padding: 4px 8px;
+            border-radius: var(--radius-pill);
+        }
+
+        .lang-btn.active {
+            background: var(--color-yellow);
+            color: var(--color-text-dark);
+        }
+
+        .navbar-toggler {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            background: none; border: none; cursor: pointer;
+        }
+
+        .navbar-toggler span {
+            width: 30px; height: 3px;
+            background-color: var(--color-text-dark);
+            border-radius: 2px;
+            transition: var(--transition);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 14px 32px;
+            font-size: 16px;
+            font-weight: 700;
+            border-radius: var(--radius-pill);
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+            font-family: var(--font-body);
+        }
+
+        .btn-filled {
+            background-color: var(--color-red);
+            color: var(--color-white);
+            box-shadow: 0 4px 15px rgba(211, 47, 47, 0.3);
+        }
+
+        .btn-filled:hover {
+            background-color: var(--color-green);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(42, 157, 143, 0.4);
+            color: var(--color-white);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--color-text-dark);
+            border: 2px solid var(--color-text-dark);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--color-text-dark);
+            color: var(--color-white);
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 80px;
+            overflow: hidden;
+            background-image: url('https://res.cloudinary.com/dzklt0a5u/image/upload/f_auto,q_auto,w_1920/v1793638490/unnamed_1_lywrci.webp');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            /* Restored semi-transparency so the background image is visible while text remains readable */
+            background: linear-gradient(135deg, rgba(253, 250, 242, 0.85) 0%, rgba(253, 250, 242, 0.10) 100%);
+            z-index: 1;
+        }
+
+        .hero-grid {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            gap: 40px;
+            position: relative;
+            z-index: 2;
+            width: 100%;
+        }
+
+        .hero-content {
+            padding: 0;
+            max-width: 800px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--color-yellow);
+            color: var(--color-text-dark);
+            padding: 8px 16px;
+            border-radius: var(--radius-pill);
+            font-weight: 700;
+            font-size: 14px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .hero-title {
+            font-size: clamp(3.5rem, 6vw, 5.5rem);
+            margin-bottom: 20px;
+            color: var(--color-text-dark);
+            text-shadow: 0 2px 15px rgba(255,255,255,0.8);
+        }
+        
+        .hero-title span { color: var(--color-red); }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--color-text-dark);
+            margin-bottom: 32px;
+            max-width: 100%;
+            text-shadow: 0 1px 10px rgba(255,255,255,0.9);
+            font-weight: 600;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        /* Section Headers */
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .section-tag {
+            font-family: var(--font-display);
+            color: var(--color-yellow);
+            font-size: 1.25rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background-color: var(--color-red);
+            border-radius: 2px;
+        }
+
+        /* About Section */
+        .about-section { padding: var(--section-pad); }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-visual {
+            position: relative;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .about-img {
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+        
+        .about-img:nth-child(2) { margin-top: 40px; }
+
+        .about-content h2 { margin-bottom: 24px; }
+        .about-content p {
+            margin-bottom: 16px;
+            color: var(--color-text-muted);
+            font-size: 1.1rem;
+        }
+
+        /* Gallery Section */
+        .gallery-section { 
+            padding: var(--section-pad);
+            background-color: var(--color-white);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 16px;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            aspect-ratio: 1;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .gallery-img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover .gallery-img { transform: scale(1.1); }
+
+        /* Reviews Section (Carousel) */
+        .reviews-section {
+            padding: var(--section-pad);
+            background-color: var(--color-cream);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .reviews-slider-container {
+            width: 100%;
+            overflow: hidden;
+            padding: 20px 0;
+            position: relative;
+        }
+        
+        /* Fade edges for carousel */
+        .reviews-slider-container::before,
+        .reviews-slider-container::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            width: 100px;
+            height: 100%;
+            z-index: 2;
+            pointer-events: none;
+        }
+        
+        .reviews-slider-container::before {
+            left: 0;
+            background: linear-gradient(to right, var(--color-cream), transparent);
+        }
+        
+        .reviews-slider-container::after {
+            right: 0;
+            background: linear-gradient(to left, var(--color-cream), transparent);
+        }
+
+        .reviews-track {
+            display: flex;
+            gap: 24px;
+            width: max-content;
+            animation: scrollCarousel 45s linear infinite;
+        }
+
+        .reviews-track:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes scrollCarousel {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(-50% - 12px)); }
+        }
+
+        .review-card {
+            min-width: 350px;
+            max-width: 350px;
+            background: var(--color-white);
+            padding: 24px;
+            border-radius: 8px; /* More like Google */
+            box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); /* Google-like shadow */
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .review-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            position: relative;
+        }
+
+        .author-avatar {
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-family: Arial, sans-serif;
+            color: var(--color-white);
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+
+        .author-info {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
+        }
+
+        .author-info h4 {
+            font-size: 14px;
+            margin: 0;
+            color: #3c4043;
+            font-weight: 500;
+            font-family: Roboto, Arial, sans-serif;
+        }
+
+        .author-meta {
+            font-size: 12px;
+            color: #70757a;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            margin-top: 2px;
+        }
+        
+        .local-guide-icon {
+            color: #ff9800; 
+            font-size: 12px;
+        }
+
+        .google-icon {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 20px;
+            height: 20px;
+        }
+
+        .review-stars {
+            color: #fbbc04;
+            display: flex;
+            gap: 1px;
+            align-items: center;
+        }
+
+        .review-stars svg { width: 14px; height: 14px; fill: currentColor; }
+
+        .review-text {
+            font-size: 14px;
+            color: #202124;
+            line-height: 1.5;
+            flex-grow: 1;
+            font-family: Roboto, Arial, sans-serif;
+            display: -webkit-box;
+            -webkit-line-clamp: 5;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .review-interactions {
+            display: flex;
+            gap: 12px;
+            font-size: 12px;
+            color: #70757a;
+            align-items: center;
+            padding-top: 0;
+            border-top: none;
+            font-family: Roboto, Arial, sans-serif;
+        }
+
+        .interaction {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            border: 1px solid #e0e0e0;
+            padding: 4px 10px;
+            border-radius: 16px;
+            cursor: pointer;
+        }
+        
+        .interaction:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .interaction svg {
+            width: 14px;
+            height: 14px;
+            fill: #70757a;
+        }
+
+        /* Info Section */
+        .info-section {
+            padding: var(--section-pad);
+            background-color: var(--color-white);
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .info-card {
+            background: var(--color-cream);
+            padding: 40px 30px;
+            border-radius: var(--radius-md);
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid rgba(0,0,0,0.03);
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--color-yellow);
+        }
+
+        .info-icon {
+            width: 60px; height: 60px;
+            background: var(--color-white);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 20px;
+            color: var(--color-red);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .info-icon svg { width: 28px; height: 28px; fill: currentColor; }
+
+        .info-card h3 {
+            margin-bottom: 12px;
+            font-size: 1.5rem;
+        }
+
+        .info-card p {
+            color: var(--color-text-muted);
+            font-size: 1.1rem;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #1a1817;
+            color: #d4d4d4;
+            padding: 80px 0 30px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .footer-logo-container {
+            background-color: var(--color-white);
+            padding: 12px;
+            border-radius: var(--radius-sm);
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .footer-logo {
+            max-width: 150px;
+            display: block;
+        }
+
+        .footer-desc {
+            margin-bottom: 24px;
+            line-height: 1.8;
+        }
+
+        .footer-socials {
+            display: flex;
+            gap: 16px;
+        }
+
+        .social-link {
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            display: flex; align-items: center; justify-content: center;
+            transition: var(--transition);
+            color: var(--color-white);
+        }
+
+        .social-link:hover {
+            background: var(--color-red);
+            transform: translateY(-3px);
+        }
+        
+        .social-link svg { width: 20px; height: 20px; fill: currentColor; }
+
+        .footer-title {
+            color: var(--color-white);
+            margin-bottom: 24px;
+            font-size: 1.5rem;
+            font-family: var(--font-display);
+        }
+
+        .footer-contact li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .footer-contact svg {
+            width: 20px; height: 20px;
+            fill: var(--color-yellow);
+            flex-shrink: 0;
+            margin-top: 4px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+        }
+        
+        .footer-bottom a {
+            color: var(--color-yellow);
+            font-weight: 600;
+        }
+
+        /* Utilities */
+        .text-center { text-align: center; }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero-grid, .about-grid { grid-template-columns: 1fr; gap: 40px; }
+            .hero { padding-top: 120px; text-align: center; }
+            .hero-content { padding-right: 0; display: flex; flex-direction: column; align-items: center; }
+            .hero-subtitle { max-width: 100%; }
+            .hero-actions { justify-content: center; }
+            .about-visual { order: -1; }
+            .info-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .navbar-toggler { display: flex; }
+            .nav-menu {
+                position: absolute; top: 100%; left: 0; width: 100%;
+                background: var(--color-white);
+                flex-direction: column; padding: 20px; gap: 20px;
+                box-shadow: var(--shadow-md);
+                clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+                transition: clip-path 0.4s ease-in-out;
+            }
+            .nav-menu.active { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+            .hero-title { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container nav-container">
+            <a href="#" class="navbar-brand">
+                <img src="https://res.cloudinary.com/dzklt0a5u/image/upload/f_auto,q_auto:eco,dpr_auto,w_250/v1793638389/RamirosLOGO_ppn9lc.png" alt="Ramiro's Mexican Food Logo" id="nav-logo">
+            </a>
+            
+            <button class="navbar-toggler" id="navbar-toggler" aria-label="Toggle Navigation">
+                <span></span><span></span><span></span>
+            </button>
+
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="#home" class="nav-link" data-es="Inicio" data-en="Home">Home</a></li>
+                <li><a href="#about" class="nav-link" data-es="Nosotros" data-en="About Us">About Us</a></li>
+                <li><a href="#gallery" class="nav-link" data-es="Galería" data-en="Gallery">Gallery</a></li>
+                <li><a href="#reviews" class="nav-link" data-es="Reseñas" data-en="Reviews">Reviews</a></li>
+                <li><a href="#contact" class="nav-link" data-es="Contacto" data-en="Contact">Contact</a></li>
+                <li>
+                    <div class="lang-switch">
+                        <span class="lang-btn" id="lang-es">ES</span>
+                        <span class="lang-btn active" id="lang-en">EN</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-overlay"></div>
+        <div class="container hero-grid">
+            <div class="hero-content">
+                <div class="badge">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+                    <span data-es="Sabor 100% Auténtico" data-en="100% Authentic Flavor">100% Authentic Flavor</span>
+                </div>
+                <h1 class="hero-title">
+                    <span data-es="Ramiro's" data-en="Ramiro's">Ramiro's</span><br>
+                    <span style="color: var(--color-text-dark);" data-es="Comida Mexicana" data-en="Mexican Food">Mexican Food</span>
+                </h1>
+                <p class="hero-subtitle" data-es="Disfruta de la mejor comida mexicana, burritos con tortillas de harina únicas y recetas tradicionales servidas con un trato cálido y familiar." data-en="Enjoy the best Mexican food, burritos with unique flour tortillas, and traditional recipes served with warm and family-friendly hospitality.">
+                    Enjoy the best Mexican food, burritos with unique flour tortillas, and traditional recipes served with warm and family-friendly hospitality.
+                </p>
+                <div class="hero-actions">
+                    <a href="https://www.restaurantlogin.com/ordering/restaurant/menu?restaurant_uid=7bc8d679-1c0a-4b57-8dde-40dcd0291ce8" target="_blank" class="btn btn-filled">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M11 9H9V2H7v7H5V2H3v7c0 2.12 1.66 3.86 3.75 3.97V22h2.5v-9.03C11.34 12.86 13 11.12 13 9V2h-2v7zm4-7v8h2.5v8H21V2h-6z"/></svg>
+                        <span data-es="Ordenar en Línea" data-en="Order Online">Order Online</span>
+                    </a>
+                    <a href="#about" class="btn btn-outline" data-es="Conócenos" data-en="Discover More">Discover More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section" id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-visual">
+                    <img src="https://res.cloudinary.com/dzklt0a5u/image/upload/f_auto,q_auto,w_600/v1793638498/unnamed_dnkptu.webp" alt="Mexican Kitchen" class="about-img" id="about-img-1">
+                    <img src="https://res.cloudinary.com/dzklt0a5u/image/upload/f_auto,q_auto,w_600/v1793638500/476184401_1159228649190550_5519963801071600177_n_p1tybv.jpg" alt="Mexican Dishes" class="about-img" id="about-img-2">
+                </div>
+                <div class="about-content">
+                    <span class="section-tag" id="about-subtitle" data-es="Nuestra Historia" data-en="Our Story">Our Story</span>
+                    <h2 class="section-title" id="about-title" data-es="Somos Ramiro's Mexican Food" data-en="We are Ramiro's Mexican Food">We are Ramiro's Mexican Food</h2>
+                    <br><br>
+                    <p id="about-p1" data-es="En Ramiro's Mexican Food creemos que la gran comida une a las personas. Cada platillo es preparado con ingredientes de calidad, recetas mexicanas auténticas y el mismo cuidado que esperarías de una comida casera." data-en="At Ramiro's Mexican Food, we believe great food brings people together. Every meal is prepared with quality ingredients, authentic Mexican recipes, and the same care you'd expect from a home-cooked meal.">
+                        At Ramiro's Mexican Food, we believe great food brings people together. Every meal is prepared with quality ingredients, authentic Mexican recipes, and the same care you'd expect from a home-cooked meal.
+                    </p>
+                    <p id="about-p2" data-es="Desde los favoritos del desayuno hasta tacos, burritos y clásicos familiares, nuestro objetivo siempre ha sido simple: servir comida fresca y sabrosa con un servicio rápido y amable todos los días." data-en="From breakfast favorites to tacos, burritos, and family classics, our goal has always been simple: serve fresh, flavorful food with fast and friendly service every day.">
+                        From breakfast favorites to tacos, burritos, and family classics, our goal has always been simple: serve fresh, flavorful food with fast and friendly service every day.
+                    </p>
+                    <p id="about-p3" data-es="Ya sea que nos visites para un bocado rápido o para compartir una comida con familiares y amigos, agradecemos tu apoyo y esperamos darte la bienvenida nuevamente." data-en="Whether you're stopping by for a quick bite or sharing a meal with family and friends, we're grateful for your support and look forward to welcoming you back again.">
+                        Whether you're stopping by for a quick bite or sharing a meal with family and friends, we're grateful for your support and look forward to welcoming you back again.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery-section" id="gallery">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag" id="gallery-subtitle" data-es="Amor al Primer Bocado" data-en="Love At First Bite">Love At First Bite</span>
+                <h2 class="section-title" id="gallery-title" data-es="Deliciosa Comida Mexicana" data-en="Delicious Mexican Food">Delicious Mexican Food</h2>
+            </div>
+            <div class="gallery-grid" id="gallery-container">
+                <div class="gallery-item"><img src="https://res.cloudinary.com/dzklt0a5u/image/upload/f_auto,q_auto,w_500,c_fill/v1793638517/ramirossss_yk5i63.jpg" class="gallery-img" alt="Gallery Food" loading="lazy"></div>
+                <div class="gallery-item"><img src="https://res.cloudinary.com/dzklt0a5u/image/upload/f_auto,q_auto,w_500,c_fill/v1793638519/ef15a349-7495-4db2-8e19-f2406eb8177b_ohu2tg.jpg" class="gallery-img" alt="Gallery Food" loading="lazy"></div>
+                <div class="gallery-item"><img src="https://res.cloudinary.com/dzklt0a5u/image/upload/f_auto,q_auto,w_500,c_fill/v1793638519/c12034de-e791-4c98-9242-9fd7d722913b_j4axhy.jpg" class="gallery-img" alt="Gallery Food" loading="lazy"></div>
+                <div class="gallery-item"><img src="https://res.cloudinary.com/dzklt0a5u/image/upload/f_auto,q_auto,w_500,c_fill/v1793638520/c6f9633c-ec31-4508-bef5-b6753f75317e_izqavf.jpg" class="gallery-img" alt="Gallery Food" loading="lazy"></div>
+                <div class="gallery-item"><img src="https://res.cloudinary.com/dzklt0a5u/image/upload/f_auto,q_auto,w_500,c_fill/v1793638521/bfb1684c-115e-4e7f-8473-ea4ce7c1d974_lo66wk.jpg" class="gallery-img" alt="Gallery Food" loading="lazy"></div>
+                <div class="gallery-item"><img src="https://res.cloudinary.com/dzklt0a5u/image/upload/f_auto,q_auto,w_500,c_fill/v1793638521/bcf0d32e-a2b3-440b-ae40-9cda474c7645_tx1kfw.jpg" class="gallery-img" alt="Gallery Food" loading="lazy"></div>
+                <div class="gallery-item"><img src="https://res.cloudinary.com/dzklt0a5u/image/upload/f_auto,q_auto,w_500,c_fill/v1793638522/be6f893d-d030-4201-a7c6-aed6c541d119_jvema5.jpg" class="gallery-img" alt="Gallery Food" loading="lazy"></div>
+                <div class="gallery-item"><img src="https://res.cloudinary.com/dzklt0a5u/image/upload/f_auto,q_auto,w_500,c_fill/v1793638522/2508f5ef-8675-4a2e-8b9b-ca7653cd0f4c_q5rmqb.jpg" class="gallery-img" alt="Gallery Food" loading="lazy"></div>
+                <div class="gallery-item"><img src="https://res.cloudinary.com/dzklt0a5u/image/upload/f_auto,q_auto,w_500,c_fill/v1793638523/447a785c-68fc-45ff-9291-f3cb2d9c6d95_lainri.jpg" class="gallery-img" alt="Gallery Food" loading="lazy"></div>
+                <div class="gallery-item"><img src="https://res.cloudinary.com/dzklt0a5u/image/upload/f_auto,q_auto,w_500,c_fill/v1793638524/21a6ebea-549d-4bee-80f5-6e9a8fc649e8_1_otp64o.jpg" class="gallery-img" alt="Gallery Food" loading="lazy"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section with Infinite Carousel -->
+    <section class="reviews-section" id="reviews">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag" data-es="Testimonios" data-en="Testimonials">Testimonials</span>
+                <h2 class="section-title" data-es="Lo Que Dicen Nuestros Clientes" data-en="What Our Customers Say">What Our Customers Say</h2>
+            </div>
+        </div>
+            
+        <div class="reviews-slider-container">
+            <div class="reviews-track" id="reviews-track">
+                
+                <!-- Review 1 -->
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="author-avatar" style="background-color: #E91E63;">A</div>
+                        <div class="author-info">
+                            <h4>Alejandra Aguirre</h4>
+                            <span class="author-meta">1 opinión</span>
+                        </div>
+                        <svg class="google-icon" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+                    </div>
+                    <div class="review-stars">
+                        <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    </div>
+                    <p class="review-text" data-es="Es un lugar que brinda alimentos exquisitos, me encanta, es comida mexicana con sabor único, burritos con tortillas de harina unicas en sabor !!! Felicidades por la amabilidad, atención, sabor y buen precio, bendiciones a los nuevos dueños y por supuesto a todos sus comensales!! Buen provecho!" data-en="It is a place that offers exquisite food, I love it, it is Mexican food with a unique flavor, burritos with flour tortillas unique in flavor !!! Congratulations on the kindness, attention, flavor and good price, blessings to the new owners and of course to all their diners!! Enjoy!">
+                        Es un lugar que brinda alimentos exquisitos, me encanta, es comida mexicana con sabor único, burritos con tortillas de harina unicas en sabor !!! Felicidades por la amabilidad, atención, sabor y buen precio, bendiciones a los nuevos dueños y por supuesto a todos sus comensales!! Buen provecho!
+                    </p>
+                    <div class="review-interactions">
+                        <span class="interaction">
+                            <svg viewBox="0 0 24 24"><path d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/></svg>
+                            1
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Review 2 -->
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="author-avatar" style="background-color: #009688;">A</div>
+                        <div class="author-info">
+                            <h4>Aldo Esparza Portugal</h4>
+                            <span class="author-meta">5 opiniones · 2 fotos</span>
+                        </div>
+                        <svg class="google-icon" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+                    </div>
+                    <div class="review-stars">
+                        <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    </div>
+                    <p class="review-text" data-es="Excelente servicio, el personal muy amable y su comida está muy buena" data-en="Excellent service, very friendly staff and their food is very good">
+                        Excelente servicio, el personal muy amable y su comida está muy buena
+                    </p>
+                </div>
+
+                <!-- Review 3 -->
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="author-avatar" style="background-color: #673AB7;">S</div>
+                        <div class="author-info">
+                            <h4>Sergio Preciado</h4>
+                            <span class="author-meta"><span class="local-guide-icon">★</span> Local Guide · 15 opiniones</span>
+                        </div>
+                        <svg class="google-icon" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+                    </div>
+                    <div class="review-stars">
+                        <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    </div>
+                    <p class="review-text" data-es="Muy rica comida y el servicio de la cajera de la tarde es excelente, fue muy amable y servicial ,grata experiencia." data-en="Very tasty food and the service from the afternoon cashier is excellent, she was very friendly and helpful, pleasant experience.">
+                        Muy rica comida y el servicio de la cajera de la tarde es excelente, fue muy amable y servicial ,grata experiencia.
+                    </p>
+                    <div class="review-interactions">
+                        <span class="interaction">
+                            <svg viewBox="0 0 24 24"><path d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/></svg>
+                            1
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Review 4 -->
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="author-avatar" style="background-color: #F44336;">R</div>
+                        <div class="author-info">
+                            <h4>Rosalba Garcia</h4>
+                            <span class="author-meta">7 opiniones · 1 foto</span>
+                        </div>
+                        <svg class="google-icon" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+                    </div>
+                    <div class="review-stars">
+                        <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    </div>
+                    <p class="review-text" data-es="Muy rica comida y súper generosos osea no están pobres las órdenes en carnes 👍😋" data-en="Very tasty food and super generous, meaning the meat portions are not poor 👍😋">
+                        Muy rica comida y súper generosos osea no están pobres las órdenes en carnes 👍😋
+                    </p>
+                </div>
+
+                <!-- Review 5 -->
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="author-avatar" style="background-color: #3F51B5;">E</div>
+                        <div class="author-info">
+                            <h4>Estuardo Pascual</h4>
+                            <span class="author-meta">3 opiniones</span>
+                        </div>
+                        <svg class="google-icon" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+                    </div>
+                    <div class="review-stars">
+                        <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    </div>
+                    <p class="review-text" data-es="Aqui siempre me han atendido muy bien excelente servicio la muchacha del drive true siempre muy amable y atenta..." data-en="They have always treated me very well here, excellent service, the drive-thru girl is always very friendly and attentive...">
+                        Aqui siempre me han atendido muy bien excelente servicio la muchacha del drive true siempre muy amable y atenta...
+                    </p>
+                </div>
+
+                <!-- Review 6 -->
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="author-avatar" style="background-color: #FF9800;">S</div>
+                        <div class="author-info">
+                            <h4>Samuel Cruz</h4>
+                            <span class="author-meta"><span class="local-guide-icon">★</span> Local Guide · 826 opiniones</span>
+                        </div>
+                        <svg class="google-icon" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+                    </div>
+                    <div class="review-stars">
+                        <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                        <svg viewBox="0 0 24 24"><path fill="#e0e0e0" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    </div>
+                    <p class="review-text" data-es="Buenos tacos no más la carne asada estaba muy dura pero lo demás muy bueno" data-en="Good tacos, just the carne asada was very tough but everything else was very good">
+                        Buenos tacos no más la carne asada estaba muy dura pero lo demás muy bueno
+                    </p>
+                </div>
+
+                <!-- Review 7 -->
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="author-avatar" style="background-color: #9C27B0;">S</div>
+                        <div class="author-info">
+                            <h4>SYLVIA CORTEZ</h4>
+                            <span class="author-meta">45 opiniones</span>
+                        </div>
+                        <svg class="google-icon" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+                    </div>
+                    <div class="review-stars">
+                        <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    </div>
+                    <p class="review-text" data-es="Por Ser La Primera ves de Pasar Comer Me Gustaron Los Burritos La Especial que Tienen Ramiro's Mexican Food" data-en="Being my first time stopping to eat, I liked the burritos, the special they have at Ramiro's Mexican Food">
+                        Por Ser La Primera ves de Pasar Comer Me Gustaron Los Burritos La Especial que Tienen Ramiro's Mexican Food
+                    </p>
+                    <div class="review-interactions">
+                        <span class="interaction">
+                            <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                            1
+                        </span>
+                    </div>
+                </div>
+                
+                <!-- Review 8 -->
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="author-avatar" style="background-color: #03A9F4;">A</div>
+                        <div class="author-info">
+                            <h4>Alejandra Cardenas</h4>
+                            <span class="author-meta"><span class="local-guide-icon">★</span> Local Guide · 573 opiniones</span>
+                        </div>
+                        <svg class="google-icon" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+                    </div>
+                    <div class="review-stars">
+                        <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                        <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    </div>
+                    <p class="review-text" data-es="Los burritos de pollo con queso ..y de asada con pico de gallo lo mejor. ...tienen que probarlos. .😋" data-en="The chicken burritos with cheese ..and asada with pico de gallo the best. ...you have to try them. .😋">
+                        Los burritos de pollo con queso ..y de asada con pico de gallo lo mejor. ...tienen que probarlos. .😋
+                    </p>
+                    <div class="review-interactions">
+                        <span class="interaction">
+                            <svg viewBox="0 0 24 24"><path d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/></svg>
+                            1
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Info Section -->
+    <section class="info-section" id="contact">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag" id="info-subtitle" data-es="Visítanos" data-en="Visit Us">Visit Us</span>
+                <h2 class="section-title" id="info-title" data-es="Información" data-en="Information">Information</h2>
+            </div>
+            <div class="info-grid">
+                <div class="info-card">
+                    <div class="info-icon">
+                        <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+                    </div>
+                    <h3 data-es="Horarios" data-en="Opening Hours">Opening Hours</h3>
+                    <p id="info-hours">Monday - Sunday<br>8AM - 10PM</p>
+                </div>
+                <div class="info-card">
+                    <div class="info-icon">
+                        <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                    </div>
+                    <h3 data-es="Teléfono" data-en="Phone">Phone</h3>
+                    <p id="info-phone">909-625-8033</p>
+                </div>
+                <div class="info-card">
+                    <div class="info-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                    </div>
+                    <h3 data-es="Dirección" data-en="Address">Address</h3>
+                    <p id="info-address">10310 Central Ave, Montclair, CA 91763</p>
+                </div>
+            </div>
+            
+            <div style="margin-top: 60px; border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-sm);">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3305.020473215277!2d-117.69176332467332!3d34.06894081686708!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c3346d790d9657%3A0xe536d5a153860bb4!2s10310%20Central%20Ave%2C%20Montclair%2C%20CA%2091763%2C%20EE.%20UU.!5e0!3m2!1ses-419!2smx!4v1700000000000!5m2!1ses-419!2smx" width="100%" height="400" style="border:0; display: block;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div class="footer-logo-container">
+                        <img src="https://res.cloudinary.com/dzklt0a5u/image/upload/f_auto,q_auto:eco,dpr_auto,w_250/v1793638389/RamirosLOGO_ppn9lc.png" alt="Logo Footer" class="footer-logo" id="footer-logo">
+                    </div>
+                    <p class="footer-desc" data-es="Tradición mexicana en cada platillo. Servimos con amor, ingredientes frescos y recetas auténticas." data-en="Mexican tradition in every dish. We serve with love, fresh ingredients and authentic recipes.">
+                        Mexican tradition in every dish. We serve with love, fresh ingredients and authentic recipes.
+                    </p>
+                    <div class="footer-socials" id="social-icons">
+                        <a href="https://www.facebook.com/profile.php?id=100094364102878" target="_blank" rel="noopener noreferrer" class="social-link"><svg viewBox="0 0 24 24"><path d="M12 2.04C6.5 2.04 2 6.53 2 12.06C2 17.06 5.66 21.21 10.44 21.96V14.96H7.9V12.06H10.44V9.85C10.44 7.34 11.93 5.96 14.22 5.96C15.31 5.96 16.45 6.15 16.45 6.15V8.62H15.19C13.95 8.62 13.56 9.39 13.56 10.18V12.06H16.34L15.89 14.96H13.56V21.96A10 10 0 0 0 22 12.06C22 6.53 17.5 2.04 12 2.04Z"/></svg></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="footer-title" data-es="Contacto" data-en="Contact">Contact</h4>
+                    <ul class="footer-contact">
+                        <li>
+                            <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                            <span id="footer-address">10310 Central Ave, Montclair, CA 91763</span>
+                        </li>
+                        <li>
+                            <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                            <span id="footer-phone">909-625-8033</span>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="footer-title" data-es="Horarios" data-en="Opening Hours">Opening Hours</h4>
+                    <p id="footer-hours">Monday - Sunday<br>8AM - 10PM</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                &copy; 2015-<span id="dynamic-year"></span> Powered by <a href="https://menutech.xyz" target="_blank" rel="noopener noreferrer">Menutech</a>. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        /* === DYNAMIC YEAR SCRIPT === */
+        document.getElementById('dynamic-year').textContent = new Date().getFullYear();
+
+        /* === CLONE REVIEWS FOR INFINITE CAROUSEL === */
+        document.addEventListener('DOMContentLoaded', () => {
+            const track = document.getElementById('reviews-track');
+            if (track) {
+                const content = track.innerHTML;
+                track.innerHTML = content + content;
+            }
+        });
+
+        /* === CLOUDINARY OPTIMIZER === */
+        const optimizeCloudinaryUrl = (url, options = {}) => {
+            if (!url || typeof url !== 'string' || !url.includes('res.cloudinary.com')) return url;
+            const [baseUrl, hash] = url.split('#');
+            if (!baseUrl.includes('/upload/')) return url;
+            const parts = baseUrl.split('/upload/');
+
+            let pathSegments = parts[1].split('/');
+            if (pathSegments.length > 1) {
+                const firstSegment = pathSegments[0];
+                const isVersion = /^v\d+$/.test(firstSegment);
+                const isTransformation = !isVersion && (firstSegment.includes('_') || firstSegment.includes(','));
+                if (isTransformation) pathSegments.shift();
+            }
+            const cleanPath = pathSegments.join('/');
+
+            let transformations = ['f_auto', 'q_auto:eco', 'dpr_auto'];
+            if (options.width) transformations.push(`w_${options.width}`);
+            if (options.height) transformations.push(`h_${options.height}`);
+            if (options.crop) transformations.push(`c_${options.crop}`);
+            
+            return `${parts[0]}/upload/${transformations.join(',')}/${cleanPath}${hash ? '#' + hash : ''}`;
+        };
+
+        /* === BILINGUAL SYSTEM === */
+        let currentLang = 'en';
+
+        function applyLanguage(lang) {
+            currentLang = lang;
+            
+            document.querySelectorAll('[data-es]').forEach(el => {
+                if(el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                    el.placeholder = el.getAttribute(`data-${lang}`);
+                } else {
+                    el.innerHTML = el.getAttribute(`data-${lang}`);
+                }
+            });
+
+            const esBtn = document.getElementById('lang-es');
+            const enBtn = document.getElementById('lang-en');
+            if(esBtn && enBtn) {
+                if (lang === 'es') {
+                    esBtn.classList.add('active');
+                    enBtn.classList.remove('active');
+                } else {
+                    enBtn.classList.add('active');
+                    esBtn.classList.remove('active');
+                }
+            }
+        }
+
+        document.getElementById('lang-es').addEventListener('click', () => applyLanguage('es'));
+        document.getElementById('lang-en').addEventListener('click', () => applyLanguage('en'));
+
+        /* === DYNAMIC DATA INJECTION === */
+        function updateUI(data) {
+            if (!data) return;
+
+            if (data.lang) applyLanguage(data.lang);
+
+            if (data.logoImg) {
+                const optLogo = optimizeCloudinaryUrl(data.logoImg, { width: 250 });
+                document.getElementById('nav-logo').src = optLogo;
+                document.getElementById('footer-logo').src = optLogo;
+                document.getElementById('favicon').href = optLogo;
+            }
+
+            if (data.heroImg) {
+                const heroSection = document.getElementById('home');
+                if (heroSection) heroSection.style.backgroundImage = `url('${optimizeCloudinaryUrl(data.heroImg, { width: 1920 })}')`;
+            }
+
+            if (data.aboutImg1) document.getElementById('about-img-1').src = optimizeCloudinaryUrl(data.aboutImg1, { width: 600 });
+            if (data.aboutImg2) document.getElementById('about-img-2').src = optimizeCloudinaryUrl(data.aboutImg2, { width: 600 });
+
+            if (data.info) {
+                const fixText = t => (t || '').replace(/
+/g, '<br>');
+                
+                if(document.getElementById('info-hours')) document.getElementById('info-hours').innerHTML = fixText(data.info.hours);
+                if(document.getElementById('info-phone')) document.getElementById('info-phone').textContent = data.info.phone || '';
+                if(document.getElementById('info-address')) document.getElementById('info-address').textContent = data.info.address || '';
+                
+                if(document.getElementById('footer-hours')) document.getElementById('footer-hours').innerHTML = fixText(data.info.hours);
+                if(document.getElementById('footer-phone')) document.getElementById('footer-phone').textContent = data.info.phone || '';
+                if(document.getElementById('footer-address')) document.getElementById('footer-address').textContent = data.info.address || '';
+            }
+
+            if (data.gallery && data.gallery.length > 0) {
+                const container = document.getElementById('gallery-container');
+                if (container) {
+                    container.innerHTML = data.gallery.map(img => `
+                        <div class="gallery-item">
+                            <img src="${optimizeCloudinaryUrl(img, { width: 500, height: 500, crop: 'fill' })}" class="gallery-img" loading="lazy">
+                        </div>
+                    `).join('');
+                }
+            }
+
+            if (data.paragraphs && data.paragraphs.about) {
+                const segments = data.paragraphs.about.split('
+
+');
+                ['about-p1', 'about-p2', 'about-p3'].forEach((id, index) => {
+                    const el = document.getElementById(id);
+                    if (el && segments[index]) {
+                        el.setAttribute('data-en', segments[index]);
+                        if(currentLang === 'en') el.textContent = segments[index];
+                    }
+                });
+            }
+        }
+
+        window.addEventListener('message', (event) => {
+            if (event.data.type === 'UPDATE_CONTENT') {
+                updateUI(event.data.data);
+            }
+        });
+
+        /* === UI INTERACTIONS === */
+        const navbarToggler = document.getElementById('navbar-toggler');
+        const navMenu = document.getElementById('nav-menu');
+        
+        navbarToggler.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            const spans = navbarToggler.querySelectorAll('span');
+            if (navMenu.classList.contains('active')) {
+                spans[0].style.transform = 'rotate(45deg) translate(5px, 6px)';
+                spans[1].style.opacity = '0';
+                spans[2].style.transform = 'rotate(-45deg) translate(5px, -6px)';
+            } else {
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
+            }
+        });
+
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                if(window.innerWidth <= 768) {
+                    navbarToggler.click();
+                }
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.MENU_TECH_STATE) updateUI(window.MENU_TECH_STATE);
+        });
+
+    </script>
+</body>
+</html>
